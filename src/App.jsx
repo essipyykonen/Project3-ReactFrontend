@@ -64,6 +64,8 @@ function Login({ setToken }) {
 function Dashboard({ token, handleLogout }) {
   const { data: items, loading, error, create, remove } = useApi("/api/snippets", token);
   const [newItem, setNewItem] = useState("");
+  const [search, setSearch] = useState("");
+  const [filterLang, setFilterLang] = useState("all");
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -98,9 +100,30 @@ function Dashboard({ token, handleLogout }) {
           </div>
           <div className="col-md-8">
             <h4>Your Items</h4>
+            <input
+              type="text"
+              className="form-control mb-3"
+              placeholder="Search items..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <select
+              className="form-select mb-3"
+              value={filterLang}
+              onChange={(e) => setFilterLang(e.target.value)}
+            >
+              <option value="all">All Languages</option>
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+              <option value="html">HTML</option>
+            </select>
             {error && <div className="alert alert-danger">{error}</div>}
             <div className="list-group">
-              {items.map(item => (
+              {items
+              .filter(item =>
+                item.title?.toLowerCawse().includes(search.toLowerCase())
+              )
+              .map(item => (
                 <div key={item._id} className="list-group-item d-flex justify-content-between align-items-center">
                   <div>
                     <h5>{item.title || item.name}</h5>
