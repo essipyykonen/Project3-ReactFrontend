@@ -62,7 +62,7 @@ function Login({ setToken }) {
 
 // Component 2: Dashboard (Main app)
 function Dashboard({ token, handleLogout }) {
-  const { data: items, loading, error, create, remove } = useApi("/api/items", token);
+  const { data: items, loading, error, create, remove } = useApi("/api/snippets", token);
   const [newItem, setNewItem] = useState("");
 
   const handleAdd = (e) => {
