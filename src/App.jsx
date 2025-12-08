@@ -68,7 +68,11 @@ function Dashboard({ token, handleLogout }) {
   const handleAdd = (e) => {
     e.preventDefault();
     if (!newItem.trim()) return;
-    create({ title: newItem });
+    create({ 
+      title: newItem,
+      language: "javascript",
+      code: "// demo code",
+    });
     setNewItem("");
   };
 
