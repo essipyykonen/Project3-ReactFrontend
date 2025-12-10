@@ -121,7 +121,7 @@ function Dashboard({ token, handleLogout }) {
             <div className="list-group">
               {items
               .filter(item =>
-                item.title?.toLowerCawse().includes(search.toLowerCase())
+                item.title?.toLowerCase().includes(search.toLowerCase())
               )
               .map(item => (
                 <div key={item._id} className="list-group-item d-flex justify-content-between align-items-center">
